@@ -8,7 +8,7 @@ FLUME_STOP_WAIT_TIME=5
 start() {
 	nohup $FLUME_HOME/bin/flume-ng agent -n agent -c $FLUME_HOME/conf/$PROJECT -f $FLUME_HOME/conf/$PROJECT/flume-conf.properties --no-reload-conf > $FLUME_HOME/logs/$PROJECT.out 2>&1 &
 
-	RUN=`ps -ef | grep flume/conf/$PROJECT | grep -v 'grep'| wc -l`
+	RUN=`ps -ef | grep flume/conf/$PROJECT: | grep -v 'grep'| wc -l`
 	if [ $RUN != 1 ]; then
 		echo "flume process is not running"
 		exit 1
@@ -18,13 +18,13 @@ start() {
 }
 
 stop() {
-	PID=`ps -ef | grep flume/conf/$PROJECT | grep -v 'grep' | awk '{print $2}'`
+	PID=`ps -ef | grep flume/conf/$PROJECT: | grep -v 'grep' | awk '{print $2}'`
 	if [ -n ${PID} ]; then
 		kill -TERM ${PID} &>/dev/null
 		
 		sleep ${FLUME_STOP_WAIT_TIME}
 
-		RUN=`ps -ef | grep flume/conf/$PROJECT | grep -v 'grep'| wc -l`
+		RUN=`ps -ef | grep flume/conf/$PROJECT: | grep -v 'grep'| wc -l`
 		if [ $RUN != 0 ]; then
 			kill -9 ${PID} &>/dev/null
 		fi
