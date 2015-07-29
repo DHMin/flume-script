@@ -8,7 +8,7 @@ flume start/stop script ( bash )
 {FLUME-HOME}/conf/{project-name}
 `
 
-#### Use sprint
+#### Use script
 `
 sh flume-script.sh [start|stop|restart] {project-name}
 `
